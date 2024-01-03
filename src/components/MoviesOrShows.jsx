@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 const urlImage = 'https://image.tmdb.org/t/p/w500'
 
-export function MoviesOrShows ({ dataToRender }) {
-  console.log(dataToRender)
+export function MoviesOrShows ({ dataToRender, isLoading, isError }) {
   return (
     <main className='movieOrShowPage'>
+      {isLoading && <strong>Loading data</strong>}
+      {isError && <strong>Error fetching data</strong>}
       <div className='movieOrShowContainer'>
         {
           dataToRender && dataToRender.length > 0

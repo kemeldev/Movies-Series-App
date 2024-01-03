@@ -1,0 +1,27 @@
+.homeMovieListContainer {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid red;
+
+}
+
+.homeMovieListContainer.loaded {
+  opacity: 1;
+  background-color: #123;
+
+}
+
+.homeMovieList {
+  display: flex;
+  flex-direction: row;
+  border: 1px green solid;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.homeMovie {
+  width: 250px;
+}

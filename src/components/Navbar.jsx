@@ -23,13 +23,20 @@ export function Navbar ({ popularMovies, popularTvShows }) {
         <nav className='navbarContainer'>
           <div className='navbarLeft'>
             <h4>Watch List App</h4>
+            <Link to='/'>
+              <button>Go to home</button>
+            </Link>
           </div>
 
           <div className='navbarRight'>
             <h4>Search: </h4>
+            {/* // Here is how we pass a state to a route, see the seach page component */}
             <Link to='/search-page' state={{ popularTvShows, popularMovies }}>
               <button onClick={handleMoviesClick}>Movies</button>
               <button onClick={handleTvShowsClick}>Tv-Shows</button>
+            </Link>
+            <Link to='/test'>
+              <button>Test React Query</button>
             </Link>
 
           </div>
