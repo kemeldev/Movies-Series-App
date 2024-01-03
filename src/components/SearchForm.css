@@ -1,0 +1,25 @@
+.seachForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: white solid 1px;
+  margin-left: 0;
+  padding: 0;
+
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+}
+
+.btnActive {
+  opacity: 0.6;
+}
+
+.btnActive:hover {
+  border-color: transparent;
+  cursor: default;
+}

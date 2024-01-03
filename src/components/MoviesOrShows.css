@@ -1,0 +1,21 @@
+.movieOrShowPage {
+  border: solid blue 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movieOrShowContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  border: solid green 2px;
+  width: 80vw;
+  gap: 15px;
+
+
+}
+
+.movieOrShow {
+  border: solid red 1px;
+}

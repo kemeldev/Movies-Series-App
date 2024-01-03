@@ -26,10 +26,13 @@ body {
   margin: 0;
   display: flex;
   text-align: center;
-  justify-content: center;
-  align-items: center;
+  width: 98vw;
   min-width: 320px;
   min-height: 100vh;
+  position: relative;
+  border: solid 2px yellow;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -71,4 +74,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.app {
+  width: 100vw;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
