@@ -1,30 +1,46 @@
-import { fetchData } from '../services/fetchMoviesOrShows'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { fetchFromApi } from '../services/fetchFromApi'
+import { fetchMoviesOrShows } from '../services/fetchMoviesOrShows'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
-export const useDataFetched = () => {
+export const usedDataFetched = () => {
   const {
-    isLoading,
+    data: dataMovies = [],
     isError,
-    data,
-    refetch,
     fetchNextPage,
-    hasNextPage
-  } = useInfiniteQuery(
-    ['moviesFetched'],
-    fetchData,
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-      refetchOnWindowFocus: false,
-      staleTime: 1000 * 3
-    }
-  )
+    hasNextPage,
+    isLoading,
+    refetch,
+    isFetchingNextPage
+  } = useInfiniteQuery({
+    queryKey: ['moviesFetched'],
+    queryFn: (params) => fetchMoviesOrShows({ ...params }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => lastPage?.nextCursor
+
+  })
 
   return {
     refetch,
     fetchNextPage,
     isLoading,
     isError,
-    movies: data?.pages.flatMap((page) => page.users) ?? [],
-    hasNextPage
+    data: dataMovies.pages?.flatMap(page => page.results) ?? [],
+    hasNextPage,
+    isFetchingNextPage
+  }
+}
+
+export const useFetch = (url, queryKey) => {
+  const { isLoading, isError, isSuccess, data = [], refetch } = useQuery({
+    queryKey,
+    queryFn: async () =>
+      fetchFromApi(url)
+  })
+  return {
+    isError,
+    isLoading,
+    isSuccess,
+    data: data ?? [],
+    refetch
   }
 }

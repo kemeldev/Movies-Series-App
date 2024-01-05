@@ -1,0 +1,25 @@
+.pageNotFound {
+  width: 120vw;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+
+}
+
+.pageNotFound img {
+  width: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+
+}
+
+.pageNotFound strong {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

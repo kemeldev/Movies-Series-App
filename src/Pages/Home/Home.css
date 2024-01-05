@@ -1,0 +1,28 @@
+.homeContainer {
+  margin-left: -30px;
+  padding: 0;
+  width: 100%;
+  border: solid 1px green;
+}
+
+
+
+.homeMovieListContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid red;
+
+}
+
+.homeMovieList {
+  display: flex;
+  flex-direction: row;
+  border: 1px green solid;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.homeMovie {
+  width: 250px;
+}

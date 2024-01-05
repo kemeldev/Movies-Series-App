@@ -2,8 +2,9 @@ import { Route, Routes } from 'react-router-dom'
 import { SearchPage } from './components/SearchPage'
 import './App.css'
 import { MovieOrShowDetails } from './components/MovieOrShowDetails'
-import { Home } from './components/Home'
 import { TestReactQuery } from './components/TestReactQuery'
+import { PageNotFound } from './Pages/PageNotFound/PageNotFound'
+import { Home } from './Pages/Home/Home'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
           <Route path='/test' element={<TestReactQuery />} />
           <Route path='/search-page' element={<SearchPage />} />
           <Route path='/search-page/movies-tvshows/:id' element={<MovieOrShowDetails />} />
+          <Route path='*' element={<PageNotFound />} />
 
         </Routes>
       </div>

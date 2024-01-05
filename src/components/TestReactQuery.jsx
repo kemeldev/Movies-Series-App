@@ -2,20 +2,15 @@ import { Link } from 'react-router-dom'
 import './TestReactQuery.css'
 import { Navbar } from './Navbar'
 import { useQuery } from '@tanstack/react-query'
-import { fetchData } from '../services/fetchMoviesOrShows'
+import { fetchMoviesOrShows } from '../services/fetchMoviesOrShows'
 import { useApi } from '../context/apiContext'
 
 export function TestReactQuery () {
   const { isLoading, isError, isSuccess, data: dataMovies = [] } = useQuery({
     queryKey: ['moviesFetched'],
     queryFn: async () =>
-      fetchData({ pageParam: 1, movieOrtv: 'movie' })
+      fetchMoviesOrShows({ pageParam: 1, movieOrtv: 'movie' })
   })
-
-  // Store the data in the queryClient
-  // import { useQuery, useQueryClient } from '@tanstack/react-query'
-  // const queryClient = useQueryClient()
-  // queryClient.setQueryData('moviesFetched', dataMovies)
 
   const { urlPosterImage } = useApi()
 

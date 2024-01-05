@@ -3,29 +3,14 @@ import { MoviesOrShows } from './MoviesOrShows'
 import movieplus from '../assets/movieplus.svg'
 import './SearchPage.css'
 import { Navbar } from './Navbar'
-import { fetchData } from '../services/fetchMoviesOrShows'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { usedDataFetched } from '../Hooks/useDataFetched'
 // import { useSearchContext } from '../context/searchContext'
 // import { useLocation } from 'react-router-dom'
 
 export function SearchPage () {
-  const {
-    data: dataMovies = [],
-    isError,
-    fetchNextPage,
-    hasNextPage,
-    isLoading,
-    isFetchingNextPage
-  } = useInfiniteQuery({
-    queryKey: ['moviesFetched'],
-    queryFn: fetchData,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => lastPage?.nextCursor
-  })
+  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage } = usedDataFetched()
 
-  const dataToRender = dataMovies.pages?.flatMap(page => page.results) ?? []
-  // console.log(dataMovies?.pages?.[0].results)
-  console.log(dataToRender)
+  console.log(data)
 
   return (
     <>
@@ -44,7 +29,7 @@ export function SearchPage () {
         <MoviesOrShows
           isLoading={isLoading}
           isError={isError}
-          dataToRender={dataToRender}
+          dataToRender={data}
         />
         <button
           onClick={() => fetchNextPage()}

@@ -18,13 +18,13 @@ export function Navbar ({ popularMovies, popularTvShows }) {
   }
 
   return (
-    <>
+    <header>
       <main className='navbar'>
         <nav className='navbarContainer'>
           <div className='navbarLeft'>
             <h4>Watch List App</h4>
             <Link to='/'>
-              <button>Go to home</button>
+              <button>Home</button>
             </Link>
           </div>
 
@@ -44,6 +44,6 @@ export function Navbar ({ popularMovies, popularTvShows }) {
         </nav>
 
       </main>
-    </>
+    </header>
   )
 }
