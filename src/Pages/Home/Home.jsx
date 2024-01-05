@@ -5,6 +5,7 @@ import { TrendingTV } from '../../components/trendingTv'
 import { TopRatedMovies } from '../../components/topRatedMovies'
 import { TopRatedTv } from '../../components/topRatedTv'
 import { useState } from 'react'
+import { PopularPeople } from '../../components/popularPeople'
 
 export function Home () {
   const [movies, setMovies] = useState(false)
@@ -39,6 +40,8 @@ export function Home () {
         {
           tv ? <TrendingTV /> : <TopRatedTv />
         }
+        <h3>Popular people</h3>
+        <PopularPeople />
 
       </main>
 

@@ -9,6 +9,8 @@ export function TopRatedTv () {
   const { isError, isLoading, isSuccess, data, refetch } = useFetch(url, queryKey)
   const { urlPosterImage } = useApi()
 
+  const dataToRender = data.results
+
   useEffect(() => {
     refetch()
   }, [url, refetch])
@@ -27,9 +29,9 @@ export function TopRatedTv () {
                       key={item.id}
                     >
                       <Link
-                        to={{
-                          pathname: `/search-page/movies-tvshows/${item.id}`
-                        }}
+                        to={`/search-page/movies-tvshows/${item.id}`}
+                        state={{ dataToRender }}
+
                       >
                         <img
                           src={urlPosterImage + item.poster_path}

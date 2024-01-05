@@ -9,8 +9,8 @@ import { createContext, useContext, useState } from 'react'
 const SearchContext = createContext()
 
 const searchState = {
-  movies: 'searchMovies',
-  tvshows: 'searchTvShows'
+  movies: 'movie',
+  tvshows: 'tv'
 }
 
 const SearchProvider = ({ children }) => {

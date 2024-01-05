@@ -1,46 +1,44 @@
 import './SearchForm.css'
 
 export function SearchForm ({ moviesOrShows, setMoviesOrShows }) {
-  const handleClickMovies = (e) => {
-    if (moviesOrShows) {
-      return
-    }
-    e.preventDefault()
-    setMoviesOrShows(prevState => !prevState)
-  }
-
-  const handleClickShows = (e) => {
-    if (!moviesOrShows) {
-      return
-    }
-    e.preventDefault()
-    setMoviesOrShows(prevState => !prevState)
-  }
-
   return (
-    <main className='searchForm'>
-      <h3>What do you want to watch?</h3>
-      <div className='btnContainer'>
-        <button className={moviesOrShows ? 'btnActive' : 'btnInactive'} onClick={handleClickMovies}>Movies</button>
-        <button className={moviesOrShows ? 'btnInactive' : 'btnActive'} onClick={handleClickShows}>Tv Shows</button>
-      </div>
-      <section>
-        <form action='/search' method='get' className='form'>
-          <h3>Specific Search</h3>
-          <label htmlFor='specificSearch'>Type the {moviesOrShows ? 'Movie' : 'Show'} to search</label>
-          <input type='text' name='specificSearch' />
+    <main className='formContainer'>
+      <section className='searchFormContainer'>
+        <form action='/search' method='get' className='searchForm'>
+          <h3>Search</h3>
+          <label htmlFor='specificSearch'>Movie to search</label>
+          <input type='text' name='specificSearch' placeholder='Avengers, Matrix etc' />
+          <button>Search</button>
         </form>
       </section>
 
-      <section>
-        <form action='/search' method='get' className='form'>
-          <h3>Quick Search</h3>
-          <label htmlFor='trends'>Trends</label>
-          <input type='checkbox' name='trends' />
-          <label htmlFor='votes'>Votes scored</label>
-          <input type='range' name='votes' min='5' max='10' />
+      <section className='sortFormContainer'>
+        <form action='/search' method='get' className='sortForm'>
+          <h3>Sort by</h3>
+          <label htmlFor='sortByName'>Name </label>
+          <input type='checkbox' name='sortByName' />
+          <label htmlFor='sortByRating'>Rating </label>
+          <input type='checkbox' name='sortByRating' />
+          <label htmlFor='releasedYear'>Released year </label>
+          <input type='checkbox' name='releasedYear' />
+          <button>Sort current search</button>
         </form>
       </section>
+
+      <section className='filtersFormContainer'>
+        <form action='/search' method='get' className='filtersForm'>
+          <label htmlFor='genreFilter'>Choose an option:</label>
+
+          <select name='genreFilter'>
+            <option value='action'>Action</option>
+            <option value='adventure'>Adventure</option>
+            <option value='animation'>Animation</option>
+            <option value='comedy'>Comedy</option>
+            <option value='crime'>Crime</option>
+          </select>
+        </form>
+      </section>
+
     </main>
   )
 }

@@ -35,9 +35,9 @@ export function Navbar ({ popularMovies, popularTvShows }) {
               <button onClick={handleMoviesClick}>Movies</button>
               <button onClick={handleTvShowsClick}>Tv-Shows</button>
             </Link>
-            <Link to='/test'>
+            {/* <Link to='/test'>
               <button>Test React Query</button>
-            </Link>
+            </Link> */}
 
           </div>
 

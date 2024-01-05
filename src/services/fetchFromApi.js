@@ -6,7 +6,7 @@ const OPTIONS = {
   }
 }
 
-// const URL_ROOT = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1'
+// const URL_ROOT = 'https://api.themoviedb.org/3'
 
 export const fetchFromApi = async (url) => {
   try {
@@ -53,6 +53,12 @@ export const fetchFromApi = async (url) => {
 
 // search multi (shows, movies)
 // https://api.themoviedb.org/3/search/multi?query=avengers&include_adult=false&language=en-US&page=1
+
+// seach movies
+// https://api.themoviedb.org/3/search/movie?query=matrix&include_adult=false&language=en-US&page=1
+
+// search tv
+// https://api.themoviedb.org/3/search/tv?query=office&include_adult=false&language=en-US&page=1
 
 // popular tv shows
 // https://api.themoviedb.org/3/tv/popular?language=en-US&page=1

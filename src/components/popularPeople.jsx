@@ -3,13 +3,13 @@ import { useFetch } from '../Hooks/useDataFetched'
 import { useApi } from '../context/apiContext'
 import { useEffect } from 'react'
 
-export function TopRatedMovies () {
-  const queryKey = ['topRatedMovies']
-  const url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1'
+export function PopularPeople () {
+  const queryKey = ['popularPeople']
+  const url = 'https://api.themoviedb.org/3/person/popular?language=en-US&page=1'
   const { isError, isLoading, isSuccess, data, refetch } = useFetch(url, queryKey)
   const { urlPosterImage } = useApi()
 
-  const dataToRender = data.results
+  console.log(data)
 
   useEffect(() => {
     refetch()
@@ -29,17 +29,16 @@ export function TopRatedMovies () {
                       key={item.id}
                     >
                       <Link
-                        to={`/search-page/movies-tvshows/${item.id}`}
-                        state={{ dataToRender }}
-
+                        to={{
+                          pathname: `/search-page/movies-tvshows/${item.id}`
+                        }}
                       >
                         <img
-                          src={urlPosterImage + item.poster_path}
+                          src={urlPosterImage + item.profile_path}
                           width={100}
                           alt={item.title}
                         />
                       </Link>
-                      <h3>{item.title}</h3>
                       <h3>{item.name}</h3>
                     </div>
                   )

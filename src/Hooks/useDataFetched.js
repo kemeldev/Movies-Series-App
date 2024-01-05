@@ -1,8 +1,7 @@
 import { fetchFromApi } from '../services/fetchFromApi'
-import { fetchMoviesOrShows } from '../services/fetchMoviesOrShows'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
-export const usedDataFetched = () => {
+export const usedDataFetched = (url, queryKey) => {
   const {
     data: dataMovies = [],
     isError,
@@ -12,8 +11,9 @@ export const usedDataFetched = () => {
     refetch,
     isFetchingNextPage
   } = useInfiniteQuery({
-    queryKey: ['moviesFetched'],
-    queryFn: (params) => fetchMoviesOrShows({ ...params }),
+    queryKey,
+    queryFn: async () =>
+      fetchFromApi(url),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => lastPage?.nextCursor
 

@@ -1,30 +1,33 @@
-// import { SearchForm } from './SearchForm'
-import { MoviesOrShows } from './MoviesOrShows'
-import movieplus from '../assets/movieplus.svg'
+import { SearchForm } from '../../components/SearchForm'
+import { MoviesOrShows } from '../../components/MoviesOrShows'
 import './SearchPage.css'
-import { Navbar } from './Navbar'
-import { usedDataFetched } from '../Hooks/useDataFetched'
+import { Navbar } from '../../components/Navbar'
+import { usedDataFetched } from '../../Hooks/useDataFetched'
+import { useEffect } from 'react'
+import { useSearchContext } from '../../context/searchContext'
 // import { useSearchContext } from '../context/searchContext'
 // import { useLocation } from 'react-router-dom'
 
 export function SearchPage () {
-  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage } = usedDataFetched()
+  const { whatToSearch } = useSearchContext()
+  const queryKey = ['search']
 
-  console.log(data)
+  const movieOrtv = whatToSearch
+  const query = 'avengers'
+  const url = `https://api.themoviedb.org/3/search/${movieOrtv}?query=${query}&include_adult=false&language=en-US&page=1`
+
+  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage, refetch } = usedDataFetched(url, queryKey)
+
+  useEffect(() => {
+    refetch()
+  }, [url, refetch])
 
   return (
     <>
       <Navbar />
-      <img
-        className='playlist_logo'
-        src={movieplus}
-        alt='Play-list logo'
-        height={35}
-      />
+
       <main className='searchPage'>
-        {/* <SearchForm
-          moviesOrShows={moviesOrShows}
-        /> */}
+        <SearchForm />
 
         <MoviesOrShows
           isLoading={isLoading}

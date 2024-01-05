@@ -1,3 +1,9 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+}
+
 .seachForm {
   display: flex;
   flex-direction: column;
@@ -8,18 +14,12 @@
 
 }
 
-.btnContainer {
+.sortForm {
   display: flex;
-  flex-direction: row;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  border: white solid 1px;
+  margin-left: 0;
+  padding: 0;
 
-}
-
-.btnActive {
-  opacity: 0.6;
-}
-
-.btnActive:hover {
-  border-color: transparent;
-  cursor: default;
 }

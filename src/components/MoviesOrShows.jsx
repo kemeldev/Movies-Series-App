@@ -8,6 +8,7 @@ export function MoviesOrShows ({ dataToRender, isLoading, isError }) {
     <main className='movieOrShowPage'>
       {isLoading && <strong>Loading data</strong>}
       {isError && <strong>Error fetching data</strong>}
+
       <div className='movieOrShowContainer'>
         {
           dataToRender && dataToRender.length > 0
@@ -19,10 +20,9 @@ export function MoviesOrShows ({ dataToRender, isLoading, isError }) {
                       key={movie.id}
                     >
                       <Link
-                        to={{
-                          pathname: `/search-page/movies-tvshows/${movie.id}`,
-                          state: { dataToRender } // Pass the prop in the state
-                        }}
+                        to={`/search-page/movies-tvshows/${movie.id}`}
+                        state={{ dataToRender }}
+
                       >
                         <img
                           src={urlImage + movie.poster_path}
