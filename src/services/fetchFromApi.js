@@ -8,9 +8,9 @@ const OPTIONS = {
 
 // const URL_ROOT = 'https://api.themoviedb.org/3'
 
-export const fetchFromApi = async (url) => {
+export const fetchFromApi = async (url, pageParam = 1) => {
   try {
-    const response = await fetch(url, OPTIONS)
+    const response = await fetch(`${url}&page=${pageParam}`, OPTIONS)
     if (!response.ok) {
       throw new Error(`Failed to fetch data from API. Status: ${response.status}`)
     }

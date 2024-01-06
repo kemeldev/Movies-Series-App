@@ -1,6 +1,7 @@
 .movieOrShowPage {
-  border: solid blue 2px;
+  border: solid blue 10px;
   display: flex;
+  width: 70%;
   align-items: center;
   justify-content: center;
 }
@@ -9,7 +10,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;
-  border: solid green 2px;
   width: 80vw;
   gap: 15px;
 

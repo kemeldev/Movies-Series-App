@@ -22,10 +22,10 @@ export function SearchPage () {
 
   const url = () => {
     if (quickSearch === quickSearchParameters.trending) {
-      return `https://api.themoviedb.org/3/${movieOrtv}/popular?language=en-US&page=1`
+      return `https://api.themoviedb.org/3/${movieOrtv}/popular?language=en-US`
     }
     if (quickSearch === quickSearchParameters.topRated) {
-      return `https://api.themoviedb.org/3/${movieOrtv}/top_rated?language=en-US&page=1`
+      return `https://api.themoviedb.org/3/${movieOrtv}/top_rated?language=en-US`
     }
   }
 
@@ -39,7 +39,6 @@ export function SearchPage () {
   const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage, refetch } = usedDataFetched(url(), queryKey)
 
   console.log('hasNextPage =', hasNextPage)
-  console.log(data)
 
   useEffect(() => {
     refetch()
@@ -60,19 +59,24 @@ export function SearchPage () {
           isError={isError}
           dataToRender={data}
         />
-        <button
-          className='loadMoreBtn'
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? 'Loading more...'
-            : hasNextPage
-              ? 'Load More'
-              : 'Nothing more to load'}
-        </button>
-
       </main>
+
+      <button
+        className='loadMoreBtn'
+        onClick={() => fetchNextPage()}
+        disabled={!hasNextPage || isFetchingNextPage}
+      >
+        {isFetchingNextPage
+          ? 'Loading more...'
+          : hasNextPage
+            ? 'Load More'
+            : 'Nothing more to load'}
+      </button>
+
+      <div className='test'>
+        <h2>Testing this space</h2>
+      </div>
+
     </>
 
   // Retrieve the data from the queryClient, in this case the data comes from react Test

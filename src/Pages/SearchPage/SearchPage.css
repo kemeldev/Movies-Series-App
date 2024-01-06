@@ -2,7 +2,18 @@
   display: flex;
   flex-direction: row;
   margin: 0;
-  position: absolute;
   left: 0;
   top: 100px;
+}
+
+.loadMoreBtn {
+  width: 200px;
+  height: 100px;
+
+
+}
+
+.test {
+  border: solid 5px purple;
+  height: 100px;
 }
