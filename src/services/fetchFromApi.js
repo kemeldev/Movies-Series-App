@@ -16,6 +16,7 @@ export const fetchFromApi = async (url) => {
     }
     const { results, page } = await response.json()
     const nextCursor = Number(page + 1)
+    console.log('nextCursor', nextCursor)
     return {
       results, nextCursor
     }

@@ -12,8 +12,8 @@ export const usedDataFetched = (url, queryKey) => {
     isFetchingNextPage
   } = useInfiniteQuery({
     queryKey,
-    queryFn: async () =>
-      fetchFromApi(url),
+    queryFn: async ({ pageParam = 1 }) =>
+      fetchFromApi(url, pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => lastPage?.nextCursor
 

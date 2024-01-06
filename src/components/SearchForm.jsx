@@ -1,8 +1,16 @@
 import './SearchForm.css'
 
-export function SearchForm ({ moviesOrShows, setMoviesOrShows }) {
+export function SearchForm ({ toggleQuickSearch }) {
   return (
     <main className='formContainer'>
+
+      <section className='quickSearchFormContainer'>
+        <form method='get' className='quickSearchForm'>
+          <h3>Quick Search</h3>
+          <button onClick={toggleQuickSearch}>Top Rated</button>
+          <button onClick={toggleQuickSearch}>Trending / Popular</button>
+        </form>
+      </section>
       <section className='searchFormContainer'>
         <form action='/search' method='get' className='searchForm'>
           <h3>Search</h3>

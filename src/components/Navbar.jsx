@@ -34,6 +34,7 @@ export function Navbar ({ popularMovies, popularTvShows }) {
             <Link to='/search-page' state={{ popularTvShows, popularMovies }}>
               <button onClick={handleMoviesClick}>Movies</button>
               <button onClick={handleTvShowsClick}>Tv-Shows</button>
+              <button>People</button>
             </Link>
             {/* <Link to='/test'>
               <button>Test React Query</button>

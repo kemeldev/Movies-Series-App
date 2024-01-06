@@ -3,31 +3,57 @@ import { MoviesOrShows } from '../../components/MoviesOrShows'
 import './SearchPage.css'
 import { Navbar } from '../../components/Navbar'
 import { usedDataFetched } from '../../Hooks/useDataFetched'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchContext } from '../../context/searchContext'
-// import { useSearchContext } from '../context/searchContext'
-// import { useLocation } from 'react-router-dom'
+
+// const query = 'avengers'
+
+// `https://api.themoviedb.org/3/search/${movieOrtv}?query=${query}&include_adult=false&language=en-US&page=1`
 
 export function SearchPage () {
+  const quickSearchParameters = {
+    trending: 'trending',
+    topRated: 'topRated'
+  }
+  const [quickSearch, setQuickSearch] = useState(quickSearchParameters.trending)
   const { whatToSearch } = useSearchContext()
+  const movieOrtv = whatToSearch
   const queryKey = ['search']
 
-  const movieOrtv = whatToSearch
-  const query = 'avengers'
-  const url = `https://api.themoviedb.org/3/search/${movieOrtv}?query=${query}&include_adult=false&language=en-US&page=1`
+  const url = () => {
+    if (quickSearch === quickSearchParameters.trending) {
+      return `https://api.themoviedb.org/3/${movieOrtv}/popular?language=en-US&page=1`
+    }
+    if (quickSearch === quickSearchParameters.topRated) {
+      return `https://api.themoviedb.org/3/${movieOrtv}/top_rated?language=en-US&page=1`
+    }
+  }
 
-  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage, refetch } = usedDataFetched(url, queryKey)
+  const toggleQuickSearch = (e) => {
+    e.preventDefault()
+    setQuickSearch((prevState) =>
+      prevState === quickSearchParameters.trending ? quickSearchParameters.topRated : quickSearchParameters.trending
+    )
+  }
+
+  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage, refetch } = usedDataFetched(url(), queryKey)
+
+  console.log('hasNextPage =', hasNextPage)
+  console.log(data)
 
   useEffect(() => {
     refetch()
-  }, [url, refetch])
+  }, [url(), refetch])
 
   return (
     <>
       <Navbar />
 
       <main className='searchPage'>
-        <SearchForm />
+        <SearchForm
+          toggleQuickSearch={toggleQuickSearch}
+
+        />
 
         <MoviesOrShows
           isLoading={isLoading}
@@ -35,6 +61,7 @@ export function SearchPage () {
           dataToRender={data}
         />
         <button
+          className='loadMoreBtn'
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
         >

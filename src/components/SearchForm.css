@@ -23,3 +23,12 @@
   padding: 0;
 
 }
+
+
+.loadMoreBtn {
+  width: 200px;
+  height: 100px;
+  position: fixed;
+  bottom: 100px;
+
+}
