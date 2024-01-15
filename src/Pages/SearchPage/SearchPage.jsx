@@ -6,21 +6,23 @@ import { usedDataFetched } from '../../Hooks/useDataFetched'
 import { useEffect, useState } from 'react'
 import { useSearchContext } from '../../context/searchContext'
 
-// const query = 'avengers'
-
-// `https://api.themoviedb.org/3/search/${movieOrtv}?query=${query}&include_adult=false&language=en-US&page=1`
-
 export function SearchPage () {
+  const [sortByName, setSortByName] = useState(false)
+
+  const queryKey = ['search']
+  const { whatToSearch } = useSearchContext()
+  const movieOrtv = whatToSearch
   const quickSearchParameters = {
     trending: 'trending',
     topRated: 'topRated'
   }
   const [quickSearch, setQuickSearch] = useState(quickSearchParameters.trending)
-  const { whatToSearch } = useSearchContext()
-  const movieOrtv = whatToSearch
-  const queryKey = ['search']
+  const [search, setSearch] = useState(null)
 
   const url = () => {
+    if (search) {
+      return `https://api.themoviedb.org/3/search/${movieOrtv}?query=${search}&include_adult=false&language=en-US&page=1`
+    }
     if (quickSearch === quickSearchParameters.trending) {
       return `https://api.themoviedb.org/3/${movieOrtv}/popular?language=en-US`
     }
@@ -29,16 +31,15 @@ export function SearchPage () {
     }
   }
 
+  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage, refetch } = usedDataFetched(url(), queryKey)
+
   const toggleQuickSearch = (e) => {
     e.preventDefault()
+    setSearch(null)
     setQuickSearch((prevState) =>
       prevState === quickSearchParameters.trending ? quickSearchParameters.topRated : quickSearchParameters.trending
     )
   }
-
-  const { fetchNextPage, isError, isLoading, data, hasNextPage, isFetchingNextPage, refetch } = usedDataFetched(url(), queryKey)
-
-  console.log('hasNextPage =', hasNextPage)
 
   useEffect(() => {
     refetch()
@@ -51,6 +52,8 @@ export function SearchPage () {
       <main className='searchPage'>
         <SearchForm
           toggleQuickSearch={toggleQuickSearch}
+          setSearch={setSearch}
+          setSortByName={setSortByName}
 
         />
 
@@ -58,6 +61,7 @@ export function SearchPage () {
           isLoading={isLoading}
           isError={isError}
           dataToRender={data}
+          sortByName={sortByName}
         />
       </main>
 

@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './MoviesOrShows.css'
 import { Link } from 'react-router-dom'
+import { useSearchContext } from '../context/searchContext'
 
 const urlImage = 'https://image.tmdb.org/t/p/w500'
 
-export function MoviesOrShows ({ dataToRender, isLoading, isError }) {
+export function MoviesOrShows ({ dataToRender, isLoading, isError, sortByName }) {
   const [uniqueMovies, setUniqueMovies] = useState([])
+  const { whatToSearch } = useSearchContext()
+  const fetchedDataRef = useRef([])
 
   // Use useEffect to update uniqueMovies when dataToRender changes
   useEffect(() => {
@@ -13,7 +16,30 @@ export function MoviesOrShows ({ dataToRender, isLoading, isError }) {
       return array.findIndex((m) => m.id === movie.id) === index
     })
     setUniqueMovies(uniqueMovies)
+    fetchedDataRef.current = uniqueMovies
   }, [dataToRender])
+
+  useEffect(() => {
+    const sortMovies = () => {
+      let sortedMovies
+      if (sortByName) {
+        if (whatToSearch === 'tv') {
+          sortedMovies = [...uniqueMovies].sort((a, b) => a.name.localeCompare(b.name))
+        }
+        if (whatToSearch === 'movie') {
+          sortedMovies = [...uniqueMovies].sort((a, b) => a.title.localeCompare(b.title))
+        }
+
+        setUniqueMovies(sortedMovies)
+      } else {
+        sortedMovies = fetchedDataRef.current
+      }
+
+      setUniqueMovies(sortedMovies)
+    }
+
+    sortMovies()
+  }, [sortByName])
 
   return (
     <main className='movieOrShowPage'>
