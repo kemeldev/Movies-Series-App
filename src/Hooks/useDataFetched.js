@@ -1,6 +1,7 @@
 import { fetchFromApi } from '../services/fetchFromApi'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
+// this functions is for infinity queries, it uses the useInfiniteQuery from ReactQuery
 export const usedDataFetched = (url, queryKey) => {
   const {
     data: dataMovies = [],
@@ -30,6 +31,7 @@ export const usedDataFetched = (url, queryKey) => {
   }
 }
 
+// this function is for querys that does not need pagination, just fetching once(or first page)
 export const useFetch = (url, queryKey) => {
   const { isLoading, isError, isSuccess, data = [], refetch } = useQuery({
     queryKey,

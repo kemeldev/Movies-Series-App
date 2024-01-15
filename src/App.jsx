@@ -6,6 +6,8 @@ import { Home } from './Pages/Home/Home'
 import { MovieOrShowDetails } from './Pages/Details/MovieOrShowDetails'
 
 function App () {
+  // TODO: MovieOrShowDetails has no styles of format, but data works fine, create the page
+  // TODO: Create a page to render the Popular people, it should be similar to MovieOrShowDetails
   return (
     <>
       <div className='app'>

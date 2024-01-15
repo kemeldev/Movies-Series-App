@@ -11,6 +11,8 @@ export const ApiProvider = ({ children }) => {
     }
   }
 
+  // TODO: just keep the urlaBackgroundImage and the urlPosterImage if needed, of create a store if it is easier
+
   const movieApiUrl = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=1&sort_by=popularity.desc'
 
   const tvApiUrl = 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc'

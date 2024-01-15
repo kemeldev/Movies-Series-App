@@ -22,9 +22,9 @@ export function Navbar ({ popularMovies, popularTvShows }) {
       <main className='navbar'>
         <nav className='navbarContainer'>
           <div className='navbarLeft'>
-            <h4>Watch List App</h4>
+
             <Link to='/'>
-              <button>Home</button>
+              <h4>Watch List App</h4>
             </Link>
           </div>
 

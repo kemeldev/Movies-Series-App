@@ -3,13 +3,13 @@ import { useFetch } from '../Hooks/useDataFetched'
 import { useApi } from '../context/apiContext'
 import { useEffect } from 'react'
 
+// TODO: style the element,
+
 export function PopularPeople () {
   const queryKey = ['popularPeople']
   const url = 'https://api.themoviedb.org/3/person/popular?language=en-US&page=1'
   const { isError, isLoading, isSuccess, data, refetch } = useFetch(url, queryKey)
   const { urlPosterImage } = useApi()
-
-  console.log(data)
 
   useEffect(() => {
     refetch()

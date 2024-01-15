@@ -1,6 +1,42 @@
+import { useState } from 'react'
 import './SearchForm.css'
 
-export function SearchForm ({ toggleQuickSearch }) {
+export function SearchForm ({ toggleQuickSearch, setSearch, setSortByName }) {
+  const [searchFormError, setSearchFormError] = useState('')
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault()
+
+    // const dataUsingRef = textInputRef.current.value
+
+    const SearchWord = new FormData(e.target)
+    const dataToSearch = SearchWord.get('specificSearch')
+    setSearch(dataToSearch)
+
+    if (dataToSearch === '') {
+      const newError = 'No se puede buscar una pelicula vacia'
+      setSearchFormError(newError)
+      console.log(newError)
+      return
+    }
+    if (dataToSearch.match(/\d+/)) {
+      const newError = 'No pueden ser solo numeros'
+      setSearchFormError(newError)
+      console.log(newError)
+
+      return
+    }
+    if (dataToSearch.length < 3) {
+      const newError = 'Al menos 3 letras para buscar la pelicula'
+      setSearchFormError(newError)
+      console.log(newError)
+    }
+  }
+
+  const handleSortByName = () => {
+    setSortByName((prevSortByName) => !prevSortByName)
+  }
+
   return (
     <main className='formContainer'>
 
@@ -11,20 +47,24 @@ export function SearchForm ({ toggleQuickSearch }) {
           <button onClick={toggleQuickSearch}>Trending / Popular</button>
         </form>
       </section>
+
       <section className='searchFormContainer'>
-        <form action='/search' method='get' className='searchForm'>
+        <form onSubmit={handleSearchSubmit} action='/search' method='get' className='searchForm'>
           <h3>Search</h3>
-          <label htmlFor='specificSearch'>Movie to search</label>
+          <label htmlFor='specificSearch'>Type to search by name</label>
+          {
+          searchFormError === '' ? null : <h2>{searchFormError}</h2>
+          }
           <input type='text' name='specificSearch' placeholder='Avengers, Matrix etc' />
           <button>Search</button>
         </form>
       </section>
 
       <section className='sortFormContainer'>
-        <form action='/search' method='get' className='sortForm'>
+        <form method='get' className='sortForm'>
           <h3>Sort by</h3>
           <label htmlFor='sortByName'>Name </label>
-          <input type='checkbox' name='sortByName' />
+          <input type='checkbox' name='sortByName' onChange={handleSortByName} />
           <label htmlFor='sortByRating'>Rating </label>
           <input type='checkbox' name='sortByRating' />
           <label htmlFor='releasedYear'>Released year </label>

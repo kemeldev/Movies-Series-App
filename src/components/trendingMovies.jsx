@@ -3,15 +3,18 @@ import { useFetch } from '../Hooks/useDataFetched'
 import { useApi } from '../context/apiContext'
 import { useEffect } from 'react'
 
-export function TrendingMovies () {
+export function TrendingMovies ({ setBackgroundImg }) {
   const queryKey = ['trendingMovies']
   const url = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
   const { isError, isLoading, isSuccess, data, refetch } = useFetch(url, queryKey)
   const { urlPosterImage } = useApi()
 
+  const dataToRender = data.results
+
   useEffect(() => {
     refetch()
   }, [url, refetch])
+
   return (
     <main className={`homeMovieListContainer ${isSuccess ? 'loaded' : ''}`}>
       {isLoading && <strong>Loading data</strong>}
@@ -27,9 +30,9 @@ export function TrendingMovies () {
                       key={item.id}
                     >
                       <Link
-                        to={{
-                          pathname: `/search-page/movies-tvshows/${item.id}`
-                        }}
+                        to={`/search-page/movies-tvshows/${item.id}`}
+                        state={{ dataToRender }}
+
                       >
                         <img
                           src={urlPosterImage + item.poster_path}

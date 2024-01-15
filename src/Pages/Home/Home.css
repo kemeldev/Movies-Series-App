@@ -1,8 +1,10 @@
 .homeContainer {
-  margin-left: -30px;
   padding: 0;
   width: 100%;
-  border: solid 1px green;
+  height: 500px;
+  border: solid 1px lightseagreen;
+  background-size: cover;
+
 }
 
 
@@ -24,5 +26,6 @@
 }
 
 .homeMovie {
-  width: 250px;
+  width: 200px;
+  border: 1px solid yellow;
 }

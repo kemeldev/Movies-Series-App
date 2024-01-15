@@ -11,8 +11,8 @@ export function MovieOrShowDetails () {
   const { state } = useLocation()
   const { dataToRender } = state || {}
 
-  console.log('Data to render', dataToRender)
-  console.log('id', id, typeof (numericId))
+  // console.log('Data to render', dataToRender)
+  // console.log('id', id, typeof (numericId))
 
   const cardToRender = dataToRender?.find(card => card.id === numericId)
 
